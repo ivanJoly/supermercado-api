@@ -6,22 +6,6 @@ class userController {
   static async signUp(req, res) {
 
     const { email, password, userName, firstName, lastName,role } = req.body;
-console.log(req.body,"estoy aca")
-    if (
-      typeof email !== 'string' ||
-      typeof password !== 'string' ||
-      typeof userName !== 'string' ||
-      typeof firstName !== 'string' ||
-      typeof lastName !== 'string'||
-      typeof role !=="string"
-    ) {
-      console.log(
-        'Call id: %s error:%s',
-        callId,
-        'Required parameter is missing or wrong type'
-      );
-      return res.status(400).send();
-    }
 
     try {
       const result = await userService.signUp(
