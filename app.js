@@ -1,18 +1,22 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const {router} = require('./src/router');
+const morgan = require('morgan')
+const router = require('./src/routes/index');
 const app = express();
+const version="v1"
 const mainDBRepository = require('./src/repositories/main.repository');
-
 mainDBRepository.connect();
 app.mainDBRepository = mainDBRepository;
 
 // Enable cors for public access
 app.use(cors());
 
+
 // JSON parsing
 app.use(bodyParser.json());
+app.use(morgan('tiny'));
+
 
 // Other request types parsing
 app.use(
@@ -28,6 +32,6 @@ app.use((req, res, next) => {
 });
 
 // API requests routing
-app.use('/', router);
+app.use(`/api/${version}`, router);
 
 module.exports = app;
