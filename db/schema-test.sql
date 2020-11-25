@@ -16,15 +16,31 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 CREATE TABLE IF NOT EXISTS `User` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `userName` VARCHAR(255) NULL,
+  `firstName` VARCHAR(255) NULL,
+  `lastName` VARCHAR(255) NULL,
+  `email` VARCHAR(255) NULL,
+  `password` VARCHAR(255) NULL,
+  `role` VARCHAR(255) NULL,
   `createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
+/*
+Usuario{
+id	integer($int64)
+username	string
+firstName	string
+lastName	string
+email	string
+password	string
+role	string
+*/
+
 LOCK TABLES `User` WRITE;
 /*!40000 ALTER TABLE `User` DISABLE KEYS */;
-INSERT INTO `User` (id,userName,email,passwordEncrypted,firstName,lastName)
+INSERT INTO `User` (id,userName,firstName,lastName,email,password,role)
 values
-(1,'userName');
+(1,'juanCor92',"juan","ignacio","cor","juanignaciocor92@gmail.com","nacho123","isAdmin");
 
 /*!40000 ALTER TABLE `User` ENABLE KEYS */;
 UNLOCK TABLES;
