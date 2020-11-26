@@ -5,9 +5,9 @@ class userService {
     
   }
   static async signUp(email, password, userName, firstName, lastName,role) {
-    const validation = userValidation({email,password,userName,firstName,lastName,role})
-    console.log(validation,"esto es validation")
-    if(validation!=="Validate") return validation
+   //const validation = userValidation({email,password,userName,firstName,lastName,role})
+    //console.log(validation,"esto es validation")
+   // if(validation!=="Validate") return validation
    const result = await userDao.exists(email, 'email');
    const exists = result[0].exists;
    console.log(exists,"esto es exists")
@@ -28,7 +28,7 @@ class userService {
     return userDao.delete(id);
   }
 
-  static async fetchUser(id) {
+  static async fetchUser(myValue,search,method) {
     //const exists = await userDao.exists(id, 'id');
     //Esto no se hace aca , se hace en el controller
    // if (exists[0].exists === 0)
@@ -37,10 +37,18 @@ class userService {
      //   error: 'user_not_found',
     //    msg: 'Usuario no encontrado'
    //   };
+console.log(myValue,search,"esto es ruta")
+  const user= await userDao.fetchUser(Number(myValue),search);
 
-  const user= userDao.fetchUser(id);
-  return user
+  if(method==="loginMethod"){return user}
+  else {
+    return user
+  }
+
+
+  
   }
 }
+
 
 module.exports = userService;

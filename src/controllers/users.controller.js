@@ -78,7 +78,7 @@ class userController {
     const { id } = req.params;
 
     try {
-      const result = await userService.fetchUser(id);
+      const result = await userService.fetchUser(id,"id");
       return res.status(200).send(result);
     } catch (error) {
 

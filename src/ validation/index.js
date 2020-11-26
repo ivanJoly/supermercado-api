@@ -2,7 +2,6 @@ const userValidation = ({userName,password,firstName,lastName,role,email})=>{
     let error =false
     if (
         !email.includes("@")  ||
-        typeof password !== 'string' ||
         typeof userName !== 'string' ||
         typeof firstName !== 'string' ||
         typeof lastName !== 'string'||
