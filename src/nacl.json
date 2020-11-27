@@ -1,0 +1,66 @@
+[
+  {
+    "group": "buyer",
+    "permissions": [
+      {
+        "resource": "users/*",
+        "methods": [
+          "PUT",
+          "DELETE"
+        ],
+        "action": "allow"
+      },
+      {
+        "resource": "product/*",
+        "methods": [
+          "GET"
+        ],
+        "action": "allow"
+      },
+      {
+        "resource": "cart/*",
+        "methods": [
+          "POST",
+          "GET",
+          "PUT",
+          "DELETE"
+        ],
+        "action": "allow"
+      }
+    ]
+  },
+  {
+    "group": "admin",
+    "permissions": [
+      {
+        "resource": "users/*",
+        "methods": [
+          "POST",
+          "GET",
+          "PUT",
+          "DELETE"
+        ],
+        "action": "allow"
+      },
+      {
+        "resource": "product/*",
+        "methods": [
+          "POST",
+          "DELETE",
+          "PUT"
+        ],
+        "action": "allow"
+      },
+      {
+        "resource": "cart/*",
+        "methods": [
+          "POST",
+          "GET",
+          "PUT",
+          "DELETE"
+        ],
+        "action": "allow"
+      }
+    ]
+  }
+]
