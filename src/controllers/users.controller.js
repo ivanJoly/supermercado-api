@@ -6,22 +6,6 @@ class userController {
   static async signUp(req, res) {
 
     const { email, password, userName, firstName, lastName,role } = req.body;
-console.log(req.body,"estoy aca")
-    if (
-      typeof email !== 'string' ||
-      typeof password !== 'string' ||
-      typeof userName !== 'string' ||
-      typeof firstName !== 'string' ||
-      typeof lastName !== 'string'||
-      typeof role !=="string"
-    ) {
-      console.log(
-        'Call id: %s error:%s',
-        callId,
-        'Required parameter is missing or wrong type'
-      );
-      return res.status(400).send();
-    }
 
     try {
       const result = await userService.signUp(
@@ -33,10 +17,22 @@ console.log(req.body,"estoy aca")
         role
       );
 
-      return res.status(200).send(result);
+      return res.status(201).send(result);
     } catch (error) {
-
-      return res.status(500).send();
+      console.log(error.message)
+      switch (error.message) {
+        case "User alredy exists":
+          //Declaraciones ejecutadas cuando el resultado de expresión coincide con el valor1
+          res.sendStatus(409)
+          break
+        case "Failed by not input":
+          res.sendStatus(500) 
+          break 
+        
+        default:
+          return res.sendStatus(500);
+          //Declaraciones ejecutadas cuando ninguno de los valores coincide con el valor de la expresión
+      }
 
     }
     
@@ -94,7 +90,7 @@ console.log(req.body,"estoy aca")
     const { id } = req.params;
 
     try {
-      const result = await userService.fetchUser(id);
+      const result = await userService.fetchUser(id,"id");
       return res.status(200).send(result);
     } catch (error) {
 

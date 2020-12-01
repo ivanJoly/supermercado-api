@@ -20,10 +20,10 @@ class userDao {
     return query(sql, value);
   }
 
-  static fetchUser(id) {
-    const sql = `SELECT email, firstName, userName, firstName, lastName, createdAt FROM User WHERE id = ?`;
+  static fetchUser(value,field) {
+    const sql = `SELECT email, firstName, userName, password,role, lastName, createdAt FROM User WHERE ${field} = ?`;
 
-    return query(sql, id);
+    return query(sql, value);
   }
 
   static delete(id) {
