@@ -17,10 +17,22 @@ class userController {
         role
       );
 
-      return res.status(200).send(result);
+      return res.status(201).send(result);
     } catch (error) {
-
-      return res.status(500).send();
+      console.log(error.message)
+      switch (error.message) {
+        case "User alredy exists":
+          //Declaraciones ejecutadas cuando el resultado de expresión coincide con el valor1
+          res.sendStatus(409)
+          break
+        case "Failed by not input":
+          res.sendStatus(500) 
+          break 
+        
+        default:
+          return res.sendStatus(500);
+          //Declaraciones ejecutadas cuando ninguno de los valores coincide con el valor de la expresión
+      }
 
     }
     

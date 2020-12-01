@@ -5,7 +5,7 @@ const router = express.Router();
 const authMiddleware= require("../middleware/auth.middleware")
 router.post("/login",authController.authenticate)
 router.put("/:id",userController.update)
-router.get("/:id",authMiddleware,userController.fetchUser)
+router.get("/:id",authMiddleware.validateAuthentication,userController.fetchUser)
 router.delete("/:id",userController.delete)
 router.post("/",userController.signUp)
 
