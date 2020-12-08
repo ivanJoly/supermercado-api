@@ -74,6 +74,7 @@ CREATE TABLE IF NOT EXISTS `Cart` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `userId` INT NOT NULL,
   `state` ENUM('active', 'closed') NOT NULL,
+  `createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -93,12 +94,12 @@ CREATE TABLE IF NOT EXISTS `CartProducts` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `cartId` INT NOT NULL,
   `productId` INT NOT NULL,
-  PRIMARY KEY (`id`)),
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 LOCK TABLES `CartProducts` WRITE;
 /*!40000 ALTER TABLE `CartProducts` DISABLE KEYS */;
-INSERT INTO `CartProducts` (id,cartId, productId)
+INSERT INTO `CartProducts` (id, cartId, productId)
 values
 (1,1,1);
 

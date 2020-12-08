@@ -4,13 +4,13 @@ const router = express.Router();
 
 router.post(`/`, cartController.createCart);
 
-router.delete(`/:id`, cartController.removeCart);
-router.put(`/:id`, cartController.buyCart);
+router.delete(`/:cartId`, cartController.removeCart);
+router.put(`/:cartId`, cartController.buyCart);
 
-router.get(`/:id/products`, cartController.showProductList);
+router.get(`/:cartId/products`, cartController.showProductList);
 
-router.post(`/:id/products/:idProduct`, cartController.addProduct);
-router.delete(`/:id/products/:idProduct`, cartController.removeProduct);
+router.post(`/:cartId/products/:productId`, cartController.addProduct);
+router.delete(`/:cartId/products/:productId`, cartController.removeProduct);
 
 
 module.exports = router;

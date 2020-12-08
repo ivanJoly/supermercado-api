@@ -2,6 +2,7 @@ const cartServices = require("../services/carts.services");
 
 class cartsController {
   static async createCart(req, res) {
+
     /*Get id by user authentication */
     const userId = 1;
 
@@ -29,14 +30,13 @@ class cartsController {
   }
 
   static async removeCart(req, res) {
+
     /*Get id by user authentication */
     const userId = 1;
-    // const {cartId} = req.params;
-    const cartId = 1;
+    const { cartId } = req.params;
 
     if (
-      (userId && typeof userId !== "number") ||
-      (cartId && typeof cartId !== "number")
+      (userId && typeof userId !== "number")
     ) {
       return res.status(400).send();
     }
@@ -65,12 +65,10 @@ class cartsController {
 
     /*Get id by user authentication */
     const userId = 1;
-    // const {cartId} = req.params;
-    const cartId = 1;
+    const { cartId } = req.params;
 
     if (
-      (userId && typeof userId !== "number") ||
-      (cartId && typeof cartId !== "number")
+      (userId && typeof userId !== "number")
     ) {
       return res.status(400).send();
     }
@@ -97,15 +95,117 @@ class cartsController {
   }
 
   static async showProductList(req, res) {
-    return res.status(200).send({ msg: "test" });
+
+    /*Get id by user authentication */
+    const userId = 1;
+    const { cartId } = req.params;
+
+    if (
+      (userId && typeof userId !== "number")
+    ) {
+      return res.status(400).send();
+    }
+
+    try {
+      const products = await cartServices.list(cartId, userId);
+      return res.status(203).send({ products, msg: 'Operación exitosa' });
+    } catch (error) {
+      const status = error.status;
+
+      if (status === undefined) return res.status(500).send();
+      if (status === "cant_access")
+        return res.status(400).send({
+          error: status,
+          msg: error.msg,
+        });
+      if (status === "cart_not_found")
+        return res.status(400).send({
+          error: status,
+          msg: error.msg,
+        });
+      return res.status(status).send(error);
+    }
   }
 
   static async addProduct(req, res) {
-    return res.status(200).send({ msg: "test" });
+
+    /*Get id by user authentication */
+    const userId = 1;
+    const { cartId, productId } = req.params;
+
+    if (
+      (userId && typeof userId !== "number")
+    ) {
+      return res.status(400).send();
+    }
+
+    try {
+      const products = await cartServices.addProductToCart(cartId, productId, userId);
+      return res.status(201).send({ products, msg: 'Operación exitosa' });
+    } catch (error) {
+      const status = error.status;
+
+      if (status === undefined) return res.status(500).send();
+      if (status === "cant_access")
+        return res.status(400).send({
+          error: status,
+          msg: error.msg,
+        });
+      if (status === "cart_not_found")
+        return res.status(400).send({
+          error: status,
+          msg: error.msg,
+        });
+      if (status === "product_not_found")
+        return res.status(400).send({
+          error: status,
+          msg: error.msg,
+        });
+      if (status === "product_without_stock")
+        return res.status(400).send({
+          error: status,
+          msg: error.msg,
+        });
+      return res.status(status).send(error);
+    }
   }
 
   static async removeProduct(req, res) {
-    return res.status(200).send({ msg: "test" });
+    
+    /*Get id by user authentication */
+    const userId = 1;
+    const { cartId, productId } = req.params;
+
+    if (
+      (userId && typeof userId !== "number")
+    ) {
+      return res.status(400).send();
+    }
+
+    try {
+      await cartServices.removeProductOfCart(cartId, productId, userId);
+      return res.status(203).send({ msg: 'Operación exitosa' });
+    } catch (error) {
+      const status = error.status;
+
+      if (status === undefined) return res.status(500).send();
+      if (status === "cant_access")
+        return res.status(400).send({
+          error: status,
+          msg: error.msg,
+        });
+      if (status === "cart_not_found")
+        return res.status(400).send({
+          error: status,
+          msg: error.msg,
+        });
+      if (status === "product_not_found")
+        return res.status(400).send({
+          error: status,
+          msg: error.msg,
+        });
+      return res.status(status).send(error);
+    }
   }
 }
 
