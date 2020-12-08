@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS `User` (
   `lastName` VARCHAR(255) NULL,
   `email` VARCHAR(255) NULL,
   `password` VARCHAR(255) NULL,
-  `role` VARCHAR(255) DEFAULT("buyer") NULL,
+  `role` VARCHAR(255) NULL,
   `createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -40,7 +40,7 @@ LOCK TABLES `User` WRITE;
 /*!40000 ALTER TABLE `User` DISABLE KEYS */;
 INSERT INTO `User` (id,userName,firstName,lastName,email,password,role)
 values
-(1,'juanCor92',"juan","ignacio","cor","juanignaciocor92@gmail.com","nacho123","isAdmin");
+(1,'juanCor92',"juan","ignacio","juanignaciocor92@gmail.com","nacho123","isAdmin");
 
 /*!40000 ALTER TABLE `User` ENABLE KEYS */;
 UNLOCK TABLES;
